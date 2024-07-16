@@ -54,7 +54,9 @@ def data_to_csv(persons: list[list]) -> None:
     with open(output_file, 'w') as file:
         file.write("name,average\n")
         for person in persons:
+            print(f"{person.name}: {person.average}s")
             file.write(f"{person.to_csv()}\n")
+        print(f"\nData written to {output_file}")
 
 def main() -> None:
     output: list[Person] = []
