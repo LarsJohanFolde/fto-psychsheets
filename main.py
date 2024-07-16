@@ -50,7 +50,7 @@ def time_to_float(time: str) -> float:
 
 def data_to_csv(persons: list[list]) -> None:
     competition_id: str = sys.argv[1]
-    output_file: str = f"{competition_id}_psychsheet.csv"
+    output_file: str = f"./psychsheets/{competition_id}_psychsheet.csv"
     with open(output_file, 'w') as file:
         file.write("name,average\n")
         for person in persons:
