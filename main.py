@@ -8,9 +8,15 @@ class Person:
     name: str
     average: float
 
+    def time(self):
+        minutes = int(self.average/60)
+        seconds = round(self.average-minutes*60, 2)
+        # I'm sorry you had to see this...
+        return f"{str(minutes) + ":" if minutes else ""}{"%05.2f" % seconds}"
+
     def to_csv(self) -> str:
-        average = str(self.average).replace(".", ",")
-        return f'{self.name},"{average}"'
+        average = self.time()
+        return f'{self.name},{average}'
 
 def get_competitors(competition_id: str) -> list[str]:
     url: str = f"https://worldcubeassociation.org/api/v0/competitions/{competition_id}/wcif/public"
@@ -54,7 +60,7 @@ def data_to_csv(persons: list[list]) -> None:
     with open(output_file, 'w') as file:
         file.write("name,average\n")
         for person in persons:
-            print(f"{person.name}: {person.average}s")
+            print(f"{person.name}: {person.time()}")
             file.write(f"{person.to_csv()}\n")
         print(f"\nData written to {output_file}")
 
